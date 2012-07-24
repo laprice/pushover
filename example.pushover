@@ -1,0 +1,7 @@
+[pushover]
+# fill in the values with your app token and user key
+# save this file as .pushover in your homedirectory.
+# go to https://pushover.net/apps/build to create an app key
+app_key = ###############################
+# put your user key from http://pushover.net here 
+user_key = ##############################

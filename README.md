@@ -1,4 +1,6 @@
-pushover
-========
+# little python library for posting notifications to pushover.
 
-Python Script to send message through http://pushover.net
+looks for a .pushoverc file in the current directory and the current users home directory
+
+Can be explicitly called with a key and device id.
+

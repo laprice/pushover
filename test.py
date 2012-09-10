@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 
-from pushover import PushOverClient
+from pushover import PushoverClient
 import sys
 
 def test_no_config():
     try:
-        ps = PushOverClient(configfile="/dev/null")
+        ps = PushoverClient(configfile="/dev/null")
     except PushOverException:
         assert(sys.exc_info()[1]=="No valid configuration found")    
     return
 
 def test_message_too_big():
     try:
-        ps = PushOverClient()
+        ps = PushoverClient()
         ps.send_message("""
 Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world,
 
@@ -26,8 +26,8 @@ Whereas it is essential to promote the development of friendly relations between
     return
 
 def test_send_message():
-    ps = PushOverClient()
-    ps.send_message("Test message from PushOverClient")
+    ps = PushoverClient()
+    ps.send_message("Test message from PushoverClient")
 
 if __name__=="__main__":
     test_no_config()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from pushover import PushoverClient
+from pushover import PushoverClient, PushoverException, PushoverMessageTooBig
 import sys
 
 def test_no_config():

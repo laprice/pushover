@@ -2,3 +2,6 @@
 *.pyc
 *.pyo
 .DS_*
+build/
+dist/
+*.egg-info/

@@ -13,11 +13,24 @@ except ImportError:
     except ImportError:
         sys.exit("Please install the simplejson library or upgrade to Python 2.6+")
 
+import logging
+py27 = (2,7)
+cur_py = sys.version_info
+logger = logging.getLogger(__name__)
+if cur_py < py27:
+    class NullHandler(logging.Handler):
+        def emit(self, record):
+            pass
+    logger.addHandler(NullHandler())
+else:
+    logger.addHandler(logging.NullHandler())
+
 def find_config():
     config = ConfigParser()
     files = config.read(['.pushover',os.path.expanduser('~/.pushover')])
     if not files:
-        sys.exit("No Configuration ( .pushover ) found")
+        logger.critical("No configuration found")
+        sys.exit(1)
     conf = { 'app_key': config.get('pushover','app_key'),
              'user_key': config.get('pushover','user_key')}
     return conf
@@ -33,10 +46,11 @@ def send_message(conf,message):
     }
     r = requests.post('https://api.pushover.net/1/messages.json', data=payload )
     if not r.status_code == requests.codes.ok:
-        print r.headers
-    
+        logger.critical("Failed to send notification.")
+        logger.debug(r.headers)
                       
 if __name__=='__main__':
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(module)s] %(levelname)s: %(message)s')
     c = find_config()
     send_message(c,"This is a test message")
     

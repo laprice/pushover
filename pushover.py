@@ -31,7 +31,7 @@ class PushoverMessageTooBig(PushoverException):
     pass
 
 class PushoverClient(object):
-    """ PushoverClient, used to send messages to the Pushover.io service. """
+    """ PushoverClient, used to send messages to the Pushover.net service. """
     def __init__(self, configfile=""):
         self.configfile = configfile
         self.parser = SafeConfigParser()
@@ -57,7 +57,7 @@ class PushoverClient(object):
 if __name__=="__main__":
     from optparse import OptionParser
     parser = OptionParser()
-    parser.description = "This module will send a message through the Pushover.io notification service. It requires at least the '-m' / '--message' parameter to be passed."
+    parser.description = "This module will send a message through the Pushover.net notification service. It requires at least the '-m' / '--message' parameter to be passed."
     parser.add_option("-c", "--config", dest = "configfile", help = "Location of the Pushover config file.")
     parser.add_option("-d", "--debug", dest = "debug", action = "store_true", help = "Log at the DEBUG loglevel.")
     parser.add_option("-m", "--message", dest = "message", help = "The message to send, will truncate to 512 chars.")

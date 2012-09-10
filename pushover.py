@@ -15,16 +15,14 @@ except ImportError:
 
 import logging
 # Set up logging and add a NullHandler
-py27 = (2,7)
-cur_py = sys.version_info
 logger = logging.getLogger(__name__)
-if cur_py < py27:
+try:
+    logger.addHandler(logging.NullHandler())
+except AttributeError:
     class NullHandler(logging.Handler):
         def emit(self, record):
             pass
     logger.addHandler(NullHandler())
-else:
-    logger.addHandler(logging.NullHandler())
 
 class PushoverException(Exception):
     pass

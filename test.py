@@ -6,7 +6,7 @@ import sys
 def test_no_config():
     try:
         ps = PushoverClient(configfile="/dev/null")
-    except PushOverException:
+    except PushoverException:
         assert(sys.exc_info()[1]=="No valid configuration found")    
     return
 
@@ -21,7 +21,7 @@ Whereas disregard and contempt for human rights have resulted in barbarous acts 
 Whereas it is essential, if man is not to be compelled to have recourse, as a last resort, to rebellion against tyranny and oppression, that human rights should be protected by the rule of law,
 
 Whereas it is essential to promote the development of friendly relations between nations,""")
-    except PushOverMessageTooBig:
+    except PushoverMessageTooBig:
         assert(sys.exc_info()[1]=="The supplied message is bigger than 512 characters.")
     return
 

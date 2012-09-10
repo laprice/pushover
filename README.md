@@ -47,3 +47,6 @@ Options:
                         The message to send, will truncate to 512 chars.
 ```
 
+## Todo
+
+ * Be able to pass in a configurationobject instead of a file when being imported.

@@ -1,10 +1,17 @@
 #!/usr/bin/env python
 
-import requests
-import json
-import os
 import sys
+import os
+import requests
 from ConfigParser import ConfigParser
+
+try:
+    import simplejson as json
+except ImportError:
+    try:
+        import json
+    except ImportError:
+        sys.exit("Please install the simplejson library or upgrade to Python 2.6+")
 
 def find_config():
     config = ConfigParser()

@@ -26,6 +26,12 @@ if cur_py < py27:
 else:
     logger.addHandler(logging.NullHandler())
 
+class PushoverException(Exception):
+    pass
+
+class PushoverMessageTooBigException(PushoverException):
+    pass
+
 class PushoverClient(object):
     """ PushoverClient, used to send messages to the Pushover.io service. """
     def __init__(self, configfile=''):
@@ -40,7 +46,7 @@ class PushoverClient(object):
 
     def send_message(self, message):
         if len(message) > 512:
-            sys.exit("message too big")
+            raise PushoverMessageTooBigException("The supplied message is bigger than 512 characters.")
         payload = {
                 'token': self.conf['app_key'],
                 'user' : self.conf['user_key'],
@@ -48,11 +54,12 @@ class PushoverClient(object):
         }   
         r = requests.post('https://api.pushover.net/1/messages.json', data=payload )
         if not r.status_code == requests.codes.ok:
-            logger.critical("Failed to send notification.")
-            logger.debug(r.headers)
+            raise r.raise_for_status()
                       
 if __name__=='__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(module)s] %(levelname)s: %(message)s')
     client = PushoverClient()
-    client.send_message("This is a test message")
-    
+    try:
+        client.send_message("This is a test message")
+    except Exception as e:
+        logger.critical("Something went wrong: {0}".format(e))

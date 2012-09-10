@@ -38,7 +38,7 @@ class PushoverClient(object):
         self.files = self.parser.read([self.configfile, os.path.expanduser("~/.pushover")])
         if not self.files:
             logger.critical("No valid configuration found, exiting.")
-            sys.exit(1)
+            raise PushOverException("No valid configuration found")
         self.conf = { "app_key": self.parser.get("pushover","app_key"),
              "user_key": self.parser.get("pushover","user_key")}
 

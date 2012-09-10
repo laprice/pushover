@@ -7,7 +7,8 @@ def test_no_config():
     try:
         ps = PushoverClient(configfile="file_does_not_exist")
     except PushoverException:
-        assert(sys.exc_info()[1]=="No valid configuration found")    
+        cls, instance, traceback = sys.exc_info()
+        assert(instance.message=="No valid configuration found")    
     return
 
 def test_message_too_big():
@@ -22,7 +23,8 @@ Whereas it is essential, if man is not to be compelled to have recourse, as a la
 
 Whereas it is essential to promote the development of friendly relations between nations,""")
     except PushoverMessageTooBig:
-        assert(sys.exc_info()[1]=="The supplied message is bigger than 512 characters.")
+        cls, instance, traceback = sys.exc_info()
+        assert(instance.message=="The supplied message is bigger than 512 characters.")
     return
 
 def test_send_message():

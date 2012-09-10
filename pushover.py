@@ -35,15 +35,15 @@ class PushoverClient(object):
         if not self.files:
             logger.critical("No valid configuration found, exiting.")
             sys.exit(1)
-        self.conf = { 'app_key': config.get('pushover','app_key'),
-             'user_key': config.get('pushover','user_key')}
+        self.conf = { 'app_key': self.parser.get('pushover','app_key'),
+             'user_key': self.parser.get('pushover','user_key')}
 
     def send_message(self, message):
         if len(message) > 512:
             sys.exit("message too big")
         payload = {
-                'token': conf['app_key'],
-                'user' : conf['user_key'],
+                'token': self.conf['app_key'],
+                'user' : self.conf['user_key'],
                 'message': message,
         }   
         r = requests.post('https://api.pushover.net/1/messages.json', data=payload )
@@ -54,5 +54,5 @@ class PushoverClient(object):
 if __name__=='__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(module)s] %(levelname)s: %(message)s')
     client = PushoverClient()
-    client.end_message("This is a test message")
+    client.send_message("This is a test message")
     

@@ -27,7 +27,7 @@ except AttributeError:
 class PushoverException(Exception):
     pass
 
-class PushoverMessageTooBigException(PushoverException):
+class PushoverMessageTooBig(PushoverException):
     pass
 
 class PushoverClient(object):
@@ -44,7 +44,7 @@ class PushoverClient(object):
 
     def send_message(self, message):
         if len(message) > 512:
-            raise PushoverMessageTooBigException("The supplied message is bigger than 512 characters.")
+            raise PushoverMessageTooBig("The supplied message is bigger than 512 characters.")
         payload = {
                 "token": self.conf["app_key"],
                 "user" : self.conf["user_key"],

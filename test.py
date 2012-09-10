@@ -5,7 +5,7 @@ import sys
 
 def test_no_config():
     try:
-        ps = PushoverClient(configfile="/dev/null")
+        ps = PushoverClient(configfile="file_does_not_exist")
     except PushoverException:
         assert(sys.exc_info()[1]=="No valid configuration found")    
     return

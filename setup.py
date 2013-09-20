@@ -11,4 +11,7 @@ setup(name='pushover',
       install_requires = ['Requests >= 0.14.0'],
       license='BSD',
       url='http://github.com/daenney/pushover',
+      entry_points={
+          'console_scripts': ['pushover = pushover.pushover:main']
+          }
 )

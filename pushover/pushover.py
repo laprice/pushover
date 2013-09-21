@@ -54,7 +54,7 @@ class PushoverClient(object):
         if not r.status_code == requests.codes.ok:
             raise r.raise_for_status()
                       
-if __name__=="__main__":
+def main():
     from optparse import OptionParser
     parser = OptionParser()
     parser.description = "This module will send a message through the Pushover.net notification service. It requires at least the '-m' / '--message' parameter to be passed."

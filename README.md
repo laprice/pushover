@@ -26,11 +26,11 @@ Take note that when using this as a module the message you send will not be auto
 
 ## Commandline
 
-Just run ```pushover --help``` (don't forget to make the script executable) or ```python pushover --help``` for help.
+Just run ```pushover --help``` for help.
 
 You'll have to at least supply a ```-m some_message``` or ```--message=some_message``` and you may supply the debug flag or an alternative configuration file.
 
-Contrary to when this module is imported, when called on the commandline the message will be truncated to 512 characters in order to avoid that kind of errors.
+Contrary to when this module is imported, when called on the commandline the message will be truncated to 512 characters in order to avoid those kind of errors.
 
 ```
 Usage: pushover [options]

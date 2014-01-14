@@ -3,7 +3,12 @@
 import sys
 import os
 import requests
-from ConfigParser import SafeConfigParser
+
+# ConfigParser renamed to configparser in Python 3
+try:
+    from ConfigParser import SafeConfigParser
+except ImportError:
+    from configparser import SafeConfigParser
 
 try:
     import simplejson as json

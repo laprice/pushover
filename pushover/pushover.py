@@ -47,18 +47,20 @@ class PushoverClient(object):
         self.conf = { "app_key": self.parser.get("pushover","app_key"),
              "user_key": self.parser.get("pushover","user_key")}
 
-    def send_message(self, message):
+    def send_message(self, message, **kwargs):
         if len(message) > 512:
             raise PushoverMessageTooBig("The supplied message is bigger than 512 characters.")
         payload = {
                 "token": self.conf["app_key"],
                 "user" : self.conf["user_key"],
                 "message": message,
-        }   
+        }
+        for key,value in kwargs.iteritems():
+            payload[key] = value
         r = requests.post("https://api.pushover.net/1/messages.json", data=payload )
         if not r.status_code == requests.codes.ok:
             raise r.raise_for_status()
-                      
+
 def main():
     from optparse import OptionParser
     parser = OptionParser()

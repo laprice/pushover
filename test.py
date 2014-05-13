@@ -37,7 +37,6 @@ def test_message_with_kwargs():
     """
     ps = PushoverClient()
     ps.send_message("Fancy Test Message",
-                    device="python test client",
                     title="fancy test",
                     url="https://pushover.net/api",
                     priority="1")
@@ -46,4 +45,5 @@ if __name__=="__main__":
     test_no_config()
     test_message_too_big()
     test_send_message()
+    test_message_with_kwargs()
 

@@ -31,6 +31,17 @@ def test_send_message():
     ps = PushoverClient()
     ps.send_message("Test message from PushoverClient")
 
+def test_message_with_kwargs():
+    """pushover.net updated their API to support a number of additional arguments
+    see https://pushover.net/api
+    """
+    ps = PushoverClient()
+    ps.send_message("Fancy Test Message",
+                    device="python test client",
+                    title="fancy test",
+                    url="https://pushover.net/api",
+                    priority="1")
+
 if __name__=="__main__":
     test_no_config()
     test_message_too_big()

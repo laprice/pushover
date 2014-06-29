@@ -47,6 +47,9 @@ class PushoverClient(object):
         self.conf = { "app_key": self.parser.get("pushover","app_key"),
              "user_key": self.parser.get("pushover","user_key")}
 
+    def __init__(self, app_key="", user_key=""):
+        self.conf = { "app_key": app_key, "user_key": user_key)}
+
     def send_message(self, message, **kwargs):
         if len(message) > 512:
             raise PushoverMessageTooBig("The supplied message is bigger than 512 characters.")

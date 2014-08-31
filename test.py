@@ -11,6 +11,15 @@ def test_no_config():
         assert(instance.message=="No valid configuration found")    
     return
 
+
+def test_no_config1():
+    try:
+        ps = PushoverClient(app_key="AABB", user_key="AABB")
+    except PushoverException:
+        cls, instance, traceback = sys.exc_info()
+        assert(instance.message=="No valid configuration found")    
+    return
+
 def test_message_too_big():
     try:
         ps = PushoverClient()
@@ -43,6 +52,7 @@ def test_message_with_kwargs():
 
 if __name__=="__main__":
     test_no_config()
+    test_no_config1()
     test_message_too_big()
     test_send_message()
     test_message_with_kwargs()

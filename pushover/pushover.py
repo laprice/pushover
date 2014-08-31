@@ -37,15 +37,29 @@ class PushoverMessageTooBig(PushoverException):
 
 class PushoverClient(object):
     """ PushoverClient, used to send messages to the Pushover.net service. """
-    def __init__(self, configfile=""):
-        self.configfile = configfile
-        self.parser = SafeConfigParser()
-        self.files = self.parser.read([self.configfile, os.path.expanduser("~/.pushover")])
-        if not self.files:
-            logger.critical("No valid configuration found, exiting.")
-            raise PushoverException("No valid configuration found")
-        self.conf = { "app_key": self.parser.get("pushover","app_key"),
-             "user_key": self.parser.get("pushover","user_key")}
+    def __init__(self, configfile="", app_key="", user_key=""):
+
+        if  len( configfile ) > 0:
+            # path for a config file is given
+            self.configfile = configfile
+            self.parser = SafeConfigParser()
+            self.files = self.parser.read(self.configfile)
+            if not self.files:
+                logger.critical("No valid configuration found, exiting.")
+                raise PushoverException("No valid configuration found")
+            self.conf = { "app_key": self.parser.get("pushover","app_key"), "user_key": self.parser.get("pushover","user_key")}
+        elif ( len(app_key) > 0 ) and ( len(user_key) > 0) :
+            self.conf = { "app_key": app_key, "user_key": user_key}
+        else:
+            # default behaviour, when no param is given: load ~/.pushover
+            self.configfile = configfile
+            self.parser = SafeConfigParser()
+            self.files = self.parser.read([self.configfile, os.path.expanduser("~/.pushover")])
+
+            if not self.files:
+                logger.critical("No valid configuration found, exiting.")
+                raise PushoverException("No valid configuration found")
+            self.conf = { "app_key": self.parser.get("pushover","app_key"), "user_key": self.parser.get("pushover","user_key")}
 
     def send_message(self, message, **kwargs):
         if len(message) > 512:
@@ -55,7 +69,8 @@ class PushoverClient(object):
                 "user" : self.conf["user_key"],
                 "message": message,
         }
-        for key,value in kwargs.iteritems():
+        #for key,value in kwargs.iteritems():
+        for key,value in kwargs.items():
             payload[key] = value
         r = requests.post("https://api.pushover.net/1/messages.json", data=payload )
         if not r.status_code == requests.codes.ok:

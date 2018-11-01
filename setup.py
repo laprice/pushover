@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='pushover',
-    version='0.4',
+    version='0.5',
     description='Send messages via https://pushover.net/ to phones',
     author='Larry Price, Daniele Sluijters, Josh Kaizoku',
     author_email='laprice@gmail.com, github@daenney.net, kaizoku@phear.cc',

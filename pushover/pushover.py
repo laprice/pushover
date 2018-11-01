@@ -55,7 +55,7 @@ class PushoverClient(object):
                 "user" : self.conf["user_key"],
                 "message": message,
         }
-        for key,value in kwargs.iteritems():
+        for key,value in kwargs.items():
             payload[key] = value
         r = requests.post("https://api.pushover.net/1/messages.json", data=payload )
         if not r.status_code == requests.codes.ok:

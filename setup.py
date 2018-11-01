@@ -4,12 +4,12 @@ from setuptools import setup
 
 setup(
     name='pushover',
-    version='0.3',
+    version='0.4',
     description='Send messages via https://pushover.net/ to phones',
     author='Larry Price, Daniele Sluijters, Josh Kaizoku',
     author_email='laprice@gmail.com, github@daenney.net, kaizoku@phear.cc',
     py_modules=['pushover.pushover'],
-    install_requires = ['Requests >= 0.14.0'],
+    install_requires = ['Requests >= 2.20.0'],
     license='BSD',
     url='http://github.com/laprice/pushover',
     entry_points={

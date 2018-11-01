@@ -22,9 +22,8 @@ Whereas disregard and contempt for human rights have resulted in barbarous acts 
 Whereas it is essential, if man is not to be compelled to have recourse, as a last resort, to rebellion against tyranny and oppression, that human rights should be protected by the rule of law,
 
 Whereas it is essential to promote the development of friendly relations between nations,""")
-    except PushoverMessageTooBig:
-        cls, instance, traceback = sys.exc_info()
-        assert(instance.message=="The supplied message is bigger than 512 characters.")
+    except PushoverMessageTooBig as instance:
+        assert(str(instance)=="The supplied message is bigger than 512 characters.")
     return
 
 def test_send_message():

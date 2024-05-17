@@ -6,9 +6,11 @@ import requests
 
 # ConfigParser renamed to configparser in Python 3
 try:
-    from ConfigParser import SafeConfigParser
+    from ConfigParser import SafeConfigParser as CP
+except ModuleNotFoundError:
+    from configparser import ConfigParser as CP
 except ImportError:
-    from configparser import SafeConfigParser
+    from configparser import SafeConfigParser as CP
 
 try:
     import simplejson as json
@@ -39,7 +41,7 @@ class PushoverClient(object):
     """ PushoverClient, used to send messages to the Pushover.net service. """
     def __init__(self, configfile=""):
         self.configfile = configfile
-        self.parser = SafeConfigParser()
+        self.parser = CP()
         self.files = self.parser.read([self.configfile, os.path.expanduser("~/.pushover")])
         if not self.files:
             logger.critical("No valid configuration found, exiting.")

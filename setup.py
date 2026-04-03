@@ -9,7 +9,7 @@ setup(
     author='Larry Price, Daniele Sluijters, Josh Kaizoku, Bryce Jasmer',
     author_email='laprice@gmail.com, github@daenney.net, kaizoku@phear.cc, bryce@jasmer.com',
     py_modules=['pushover.pushover'],
-    install_requires = ['Requests == 2.32.3'],
+    install_requires = ['Requests == 2.33.0'],
     license='BSD',
     url='http://github.com/laprice/pushover',
     entry_points={
